@@ -12,7 +12,8 @@ class Home extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.green[200],
-        accentColor: Colors.greenAccent,
+        splashColor: Colors.greenAccent,
+        accentColor: Colors.green[50],
       ),
       home: SplashScreen(),
       onGenerateRoute: Router.generateRoute,
