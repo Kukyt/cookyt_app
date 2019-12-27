@@ -1,6 +1,6 @@
 import 'package:cookyt_app/src/styles/profile_page_styles.dart';
-import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart'
+;
 class DescriptionTextWidget extends StatefulWidget {
   final String text;
 
