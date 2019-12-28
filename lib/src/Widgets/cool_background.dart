@@ -10,7 +10,7 @@ class CoolBackground extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         image: DecorationImage(
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           image: AssetImage('assets/images/backgrounds/fancy_food_bg.png'),
         ),
       ),
