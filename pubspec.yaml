@@ -23,6 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  page_transition: "^1.1.5"
 
 dev_dependencies:
   flutter_test:
@@ -49,7 +50,7 @@ flutter:
     - assets/images/profilephoto.jpeg
     - assets/images/logos/facebook.png
     - assets/images/logos/google.png
-    - assets/images/rock_background.jpg
+    - assets/images/backgrounds/fancy_food_bg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -63,17 +64,8 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: PT Sans
+    - family: Baloo Bhai
       fonts:
-        - asset: assets/fonts/PTSans/PTSans-Regular.ttf
-    - family: Roboto Mono
-      fonts:
-        - asset: assets/fonts/RobotoMono/RobotoMono-Regular.ttf
-    - family: Satisfy
-      fonts:
-       - asset: assets/fonts/Satisfy/Satisfy-Regular.ttf
-    - family: Lobster
-      fonts:
-       - asset: assets/fonts/Lobster/Lobster-Regular.ttf
+        - asset: assets/fonts/Baloo_Bhai/BalooBhai-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

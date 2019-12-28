@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 final cookytLogoStyle = TextStyle(
-  fontFamily: 'Satisfy',
+  fontFamily: 'Baloo Bhai',
   color: Colors.white,
-  fontSize: 100.0,
+  fontSize: 80.0,
   fontWeight: FontWeight.bold,
 );
 
 final brandPhraseStyle = TextStyle(
-  fontFamily: 'Satisfy',
+  fontFamily: 'Baloo Bhai',
   color: Colors.white,
   fontSize: 35.0,
   fontWeight: FontWeight.bold,
