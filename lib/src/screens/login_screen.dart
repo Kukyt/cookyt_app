@@ -94,24 +94,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 30.0),
-                        Hero(
-                          tag: 'button',
-                          child: Material(
-                            type: MaterialType.transparency,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 60.0, vertical: 5.0),
-                              child: Text(
-                                'Login',
-                                style: loginTextStyle(),
-                              ),
-                              color: Colors.tealAccent,
-                              onPressed: _submit,
-                            ),
+                        RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 60.0, vertical: 5.0),
+                          child: Text(
+                            'Login',
+                            style: loginTextStyle(),
+                          ),
+                          color: Colors.tealAccent,
+                          onPressed: _submit,
                         ),
                         SizedBox(height: 20.0),
                         Row(

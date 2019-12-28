@@ -106,26 +106,20 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
                         SizedBox(height: 20.0),
-                        Hero(
-                          tag: 'button',
-                          child: Material(
-                            type: MaterialType.transparency,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 30.0,
-                                vertical: 5.0,
-                              ),
-                              child: Text(
-                                'Signup',
-                                style: loginTextStyle(),
-                              ),
-                              color: Colors.tealAccent,
-                              onPressed: _submit,
-                            ),
+                        RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30.0,
+                            vertical: 5.0,
+                          ),
+                          child: Text(
+                            'Signup',
+                            style: loginTextStyle(),
+                          ),
+                          color: Colors.tealAccent,
+                          onPressed: _submit,
                         ),
                         SizedBox(height: 20.0),
                         InkWell(
