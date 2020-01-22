@@ -1,151 +1,130 @@
-import 'package:cookyt_app/src/Widgets/cool_background.dart';
+import 'package:cookyt_app/src/Widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/Widgets/signup_with_button.dart';
+import 'package:cookyt_app/src/Widgets/smooth_background.dart';
+import 'package:cookyt_app/src/blocs/managers/login_form_manager.dart';
+import 'package:cookyt_app/src/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/screens/signup_screen.dart';
 import 'package:cookyt_app/src/styles/log_sign_styles.dart';
 import 'package:cookyt_app/src/styles/splash_screen_styles.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   static const String id = 'login_screen';
-
-  LoginScreen({Key key}) : super(key: key);
-
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  var _formKey = GlobalKey<FormState>();
-  String _email;
-  String _password;
-
-  void _submit() {
-    if (_formKey.currentState.validate()) {
-      print(_email);
-      print(_password);
-      Navigator.pushReplacementNamed(context, FeedScreen.id);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    final LoginFormManager manager =
+        Provider.of(context).fetch(LoginFormManager);
+    final Size mediaSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(children: [
+      body: Stack(overflow: Overflow.visible, children: [
         Positioned(
           top: 0.0,
-          child: CoolBackground(),
+          child: SmoothBackground(),
         ),
-        Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Hero(
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: mediaSize.height*0.16),
+                child: Hero(
                   tag: 'logo',
+                  transitionOnUserGestures: true,
                   child: Material(
                     type: MaterialType.transparency,
-                    child: Text(
-                      'Cookit',
-                      style: cookytLogoStyle,
-                    ),
+                    child: Text('Cookit', style: cookytLogoStyle),
                   ),
                 ),
-                Form(
-                  key: _formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                    child: Column(
-                      children: <Widget>[
-                        Hero(
-                          tag: 'email_field',
-                          child: Material(
-                            type: MaterialType.transparency,
-                            child: TextFormField(
-                              keyboardAppearance: Brightness.dark,
-                              keyboardType: TextInputType.emailAddress,
-                              autofocus: false,
-                              style: hintTextStyle,
-                              decoration: textFieldDecoration('Email'),
-                              validator: (input) => !input.contains('@')
-                                  ? 'Please enter a valid email'
-                                  : null,
-                              onSaved: (input) => _email = input,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30.0),
-                        Hero(
-                          tag: 'pwd_field',
-                          child: Material(
-                            type: MaterialType.transparency,
-                            child: TextFormField(
-                              autofocus: false,
-                              obscureText: true,
-                              keyboardAppearance: Brightness.dark,
-                              keyboardType: TextInputType.visiblePassword,
-                              style: hintTextStyle,
-                              decoration: textFieldDecoration('Password'),
-                              validator: (input) => (input.length < 6)
-                                  ? 'Please enter a valid password'
-                                  : null,
-                              onSaved: (input) => _password = input,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30.0),
-                        RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 60.0, vertical: 5.0),
-                          child: Text(
-                            'Login',
-                            style: loginTextStyle(),
-                          ),
-                          color: Colors.tealAccent,
-                          onPressed: _submit,
-                        ),
-                        SizedBox(height: 20.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text('New?', style: loginTextStyle()),
-                            SizedBox(width: 10.0),
-                            InkWell(
-                              child: Text(
-                                'Signup here',
-                                style: loginTextStyle(underline: true),
-                                softWrap: true,
-                              ),
-                              onTap: () =>
-                                  Navigator.pushNamed(context, SignupScreen.id),
-                            )
-                          ],
-                        ),
-                        Text('─  OR  ─', style: loginTextStyle()),
-                        Text('Signup with', style: loginTextStyle()),
-                        SizedBox(height: 15.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            SignUpWithButton(
-                              imagePath: 'assets/images/logos/google.png',
-                              onTap: null,
-                            ),
-                            SignUpWithButton(
-                              imagePath: 'assets/images/logos/facebook.png',
-                              onTap: null,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: mediaSize.width*0.12),
+                child: RxTextField(
+                  suscribe: manager.email$,
+                  dispatch: manager.setEmail,
+                  keyboardAppearance: Brightness.dark,
+                  keyboardType: TextInputType.emailAddress,
+                  autofocus: false,
+                  style: hintTextStyle,
+                  decoration: textFieldDecoration('Email'),
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: mediaSize.width*0.12, vertical: 40.0),
+                child: RxTextField(
+                  suscribe: manager.password$,
+                  dispatch: manager.setPassword,
+                  autofocus: false,
+                  obscureText: true,
+                  keyboardAppearance: Brightness.dark,
+                  keyboardType: TextInputType.visiblePassword,
+                  style: hintTextStyle,
+                  decoration: textFieldDecoration('Password'),
+                ),
+              ),
+              StreamBuilder<Object>(
+                  stream: manager.isFormValid$,
+                  builder: (context, snapshot) {
+                    return RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 60.0,
+                        vertical: 5.0,
+                      ),
+                      child: Text('Login', style: loginTextStyle()),
+                      color: Colors.tealAccent,
+                      onPressed: !snapshot.hasData
+                          ? null
+                          : () {
+                              manager.submit();
+                              Navigator.pushReplacementNamed(
+                                  context, FeedScreen.id);
+                            },
+                    );
+                  }),
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(right: 6.0),
+                      child: Text('New?', style: loginTextStyle()),
+                    ),
+                    InkWell(
+                      child: Text(
+                        'Signup here',
+                        style: loginTextStyle(underline: true),
+                        softWrap: true,
+                      ),
+                      onTap: () =>
+                          Navigator.pushNamed(context, SignupScreen.id),
+                    )
+                  ],
+                ),
+              ),
+              Text('─  OR  ─', style: loginTextStyle()),
+              Text('Signup with', style: loginTextStyle()),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    SignUpWithButton(
+                      imagePath: 'assets/images/logos/google.png',
+                      onTap: () => print('Google was pressed'),
+                    ),
+                    SignUpWithButton(
+                      imagePath: 'assets/images/logos/facebook.png',
+                      onTap: () => print('Facebook was pressed'),
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ]),

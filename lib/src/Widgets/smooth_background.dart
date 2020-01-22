@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CoolBackground extends StatelessWidget {
-  const CoolBackground({Key key}) : super(key: key);
+class SmoothBackground extends StatelessWidget {
+  const SmoothBackground({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

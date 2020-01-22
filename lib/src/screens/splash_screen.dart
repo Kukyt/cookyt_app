@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:cookyt_app/src/Widgets/cool_background.dart';
+import 'package:cookyt_app/src/Widgets/smooth_background.dart';
 import 'package:cookyt_app/src/styles/splash_screen_styles.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(children: [
         Positioned(
           top: 0.0,
-          child: CoolBackground(),
+          child: SmoothBackground(),
         ),
         Center(
           child: Column(
