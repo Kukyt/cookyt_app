@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InputDecoration textFieldDecoration(name) {
+InputDecoration rxTextFieldDecoration({String hintText}) {
   return InputDecoration(
     errorStyle: TextStyle(
         fontFamily: 'Baloo Bhai',
@@ -9,7 +9,7 @@ InputDecoration textFieldDecoration(name) {
         fontSize: 17.0),
     filled: true,
     fillColor: Colors.white,
-    hintText: name,
+    hintText: hintText,
     contentPadding: const EdgeInsets.only(left: 14.0),
     focusedBorder: _textFieldBorder,
     enabledBorder: _textFieldBorder,

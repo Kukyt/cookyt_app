@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SmoothBackground extends StatelessWidget {
-  const SmoothBackground({Key key}) : super(key: key);
+Positioned positionedBackground = Positioned(
+  top: 0.0,
+  child: _Background(),
+);
+
+class _Background extends StatelessWidget {
+  const _Background({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

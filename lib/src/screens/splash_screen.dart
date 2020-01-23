@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:cookyt_app/src/Widgets/smooth_background.dart';
+import 'package:cookyt_app/src/Widgets/login_sign_widgets/cookit_title.dart';
+import 'package:cookyt_app/src/Widgets/login_sign_widgets/positioned_background.dart';
 import 'package:cookyt_app/src/styles/splash_screen_styles.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
@@ -28,17 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        Positioned(
-          top: 0.0,
-          child: SmoothBackground(),
-        ),
+        positionedBackground,
         Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Center(
-                child: Text('Cookit', style: cookytLogoStyle),
-              ),
+              CookitTitle(),
               Text('Cook your life', style: brandPhraseStyle),
             ],
           ),
