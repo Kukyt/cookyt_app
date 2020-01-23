@@ -1,65 +1,67 @@
-import 'package:cookyt_app/src/styles/log_sign_styles.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class RxRaisedButton extends StatelessWidget {
+class RxRaisedButton extends RaisedButton {
   final Stream<Object> suscribe;
-  final VoidCallback onPressed;
-  final VoidCallback onLongPress;
-  final ValueChanged<bool> onHighlightChanged;
-  final ButtonTextTheme textTheme;
-  final Color textColor;
-  final Color disabledTextColor;
-  final Color color;
-  final Color disabledColor;
-  final Color focusColor;
-  final Color hoverColor;
-  final Color highlightColor;
-  final Color splashColor;
-  final Brightness colorBrightness;
-  final double elevation;
-  final double focusElevation;
-  final double hoverElevation;
-  final double highlightElevation;
-  final double disabledElevation;
-  final EdgeInsetsGeometry padding;
-  final ShapeBorder shape;
-  final Clip clipBehavior;
-  final FocusNode focusNode;
-  final bool autofocus;
-  final MaterialTapTargetSize materialTapTargetSize;
-  final Duration animationDuration;
-  final Widget child;
 
   const RxRaisedButton({
     Key key,
     @required this.suscribe,
-    @required this.onPressed,
-    this.onLongPress,
-    this.onHighlightChanged,
-    this.textTheme,
-    this.textColor,
-    this.disabledTextColor,
-    this.color,
-    this.disabledColor,
-    this.focusColor,
-    this.hoverColor,
-    this.highlightColor,
-    this.splashColor,
-    this.colorBrightness,
-    this.elevation,
-    this.focusElevation,
-    this.hoverElevation,
-    this.highlightElevation,
-    this.disabledElevation,
-    this.padding,
-    this.shape,
-    this.clipBehavior,
-    this.focusNode,
-    this.autofocus,
-    this.materialTapTargetSize,
-    this.animationDuration,
-    this.child,
-  }) : super(key: key);
+    @required VoidCallback onPressed,
+    VoidCallback onLongPress,
+    ValueChanged<bool> onHighlightChanged,
+    ButtonTextTheme textTheme,
+    Color textColor,
+    Color disabledTextColor,
+    Color color,
+    Color disabledColor,
+    Color focusColor,
+    Color hoverColor,
+    Color highlightColor,
+    Color splashColor,
+    Brightness colorBrightness,
+    double elevation,
+    double focusElevation,
+    double hoverElevation,
+    double highlightElevation,
+    double disabledElevation,
+    EdgeInsetsGeometry padding,
+    ShapeBorder shape,
+    Clip clipBehavior = Clip.none,
+    FocusNode focusNode,
+    bool autofocus = false,
+    MaterialTapTargetSize materialTapTargetSize,
+    Duration animationDuration,
+    Widget child,
+  }) : super(
+          key: key,
+          onPressed: onPressed,
+          onLongPress: onLongPress,
+          onHighlightChanged: onHighlightChanged,
+          textTheme: textTheme,
+          textColor: textColor,
+          disabledTextColor: disabledTextColor,
+          color: color,
+          disabledColor: disabledColor,
+          focusColor: focusColor,
+          hoverColor: hoverColor,
+          highlightColor: highlightColor,
+          splashColor: splashColor,
+          colorBrightness: colorBrightness,
+          elevation: elevation,
+          focusElevation: focusElevation,
+          hoverElevation: hoverElevation,
+          highlightElevation: highlightElevation,
+          disabledElevation: disabledElevation,
+          padding: padding,
+          shape: shape,
+          clipBehavior: clipBehavior,
+          focusNode: focusNode,
+          autofocus: autofocus,
+          materialTapTargetSize: materialTapTargetSize,
+          animationDuration: animationDuration,
+          child: child,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -67,15 +69,32 @@ class RxRaisedButton extends StatelessWidget {
         stream: suscribe,
         builder: (context, snapshot) {
           return RaisedButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30.0,
-              vertical: 5.0,
-            ),
-            child: Text('Signup', style: loginTextStyle()),
-            color: Colors.tealAccent,
-            onPressed: !snapshot.hasData ? null : () => onPressed,
+            onPressed: !snapshot.hasData ? null : onPressed,
+            onLongPress: onLongPress,
+            onHighlightChanged: onHighlightChanged,
+            textTheme: textTheme,
+            textColor: textColor,
+            disabledTextColor: disabledTextColor,
+            color: color,
+            disabledColor: disabledColor,
+            focusColor: focusColor,
+            hoverColor: hoverColor,
+            highlightColor: highlightColor,
+            splashColor: splashColor,
+            colorBrightness: colorBrightness,
+            elevation: elevation,
+            focusElevation: focusElevation,
+            hoverElevation: hoverElevation,
+            highlightElevation: highlightElevation,
+            disabledElevation: disabledElevation,
+            padding: padding,
+            shape: shape,
+            clipBehavior: clipBehavior,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            materialTapTargetSize: materialTapTargetSize,
+            animationDuration: animationDuration,
+            child: child,
           );
         });
   }
