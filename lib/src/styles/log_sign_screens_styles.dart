@@ -32,11 +32,7 @@ final _textFieldBorder = UnderlineInputBorder(
   borderRadius: BorderRadius.circular(10),
 );
 
-TextStyle loginTextStyle({bool underline = false}) {
-  var decoration = TextDecoration.none;
-  if (underline == true) {
-    decoration = TextDecoration.underline;
-  }
+TextStyle loginTextStyle({TextDecoration decoration = TextDecoration.none}) {
   return TextStyle(
     fontFamily: 'Baloo Bhai',
     decoration: decoration,

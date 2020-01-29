@@ -7,7 +7,7 @@ import 'package:cookyt_app/src/blocs/managers/login_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/screens/signup_screen.dart';
-import 'package:cookyt_app/src/styles/log_sign_styles.dart';
+import 'package:cookyt_app/src/styles/log_sign_screens_styles.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -102,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                       InkWell(
                           child: Text(
                             'Signup here',
-                            style: loginTextStyle(underline: true),
+                            style: loginTextStyle(decoration: TextDecoration.underline),
                             softWrap: true,
                           ),
                           onTap: () {

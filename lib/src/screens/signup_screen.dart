@@ -5,7 +5,7 @@ import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/blocs/managers/signup_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
-import 'package:cookyt_app/src/styles/log_sign_styles.dart';
+import 'package:cookyt_app/src/styles/log_sign_screens_styles.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -102,7 +102,7 @@ class SignupScreen extends StatelessWidget {
                 child: InkWell(
                   child: Text(
                     'Back to login',
-                    style: loginTextStyle(underline: true),
+                    style: loginTextStyle(decoration: TextDecoration.underline),
                   ),
                   onTap: () => Navigator.pop(context),
                 ),

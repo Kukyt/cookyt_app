@@ -9,9 +9,9 @@ class Overseer {
     register(SignUpFormManager, SignUpFormManager());
   }
 
-  register(name, object) {
+  void register(name, object) {
     repository[name] = object;
   }
 
-  fetch(name) => repository[name];
+  dynamic fetch(name) => repository[name];
 }

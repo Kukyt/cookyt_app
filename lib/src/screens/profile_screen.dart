@@ -1,6 +1,6 @@
 import 'package:cookyt_app/src/Widgets/user_description.dart';
 import 'package:cookyt_app/src/models/user.dart';
-import 'package:cookyt_app/src/styles/profile_page_styles.dart';
+import 'package:cookyt_app/src/styles/profile_screen_styles.dart';
 import 'package:flutter/material.dart';
 import '../Mock/current_user.dart';
 
