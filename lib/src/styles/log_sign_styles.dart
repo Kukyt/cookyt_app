@@ -11,6 +11,7 @@ InputDecoration rxTextFieldDecoration({String hintText}) {
     filled: true,
     fillColor: Colors.white,
     hintText: hintText,
+    hintMaxLines: 2,
     contentPadding: const EdgeInsets.only(left: 14.0),
     focusedBorder: _textFieldBorder,
     focusedErrorBorder: _textFieldBorder,

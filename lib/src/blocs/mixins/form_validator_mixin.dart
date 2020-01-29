@@ -11,7 +11,7 @@ mixin FormValidatorMixin {
     if (_validEmail.hasMatch(value))
       sink.add(value);
     else
-      sink.addError('Invalid email');
+      sink.addError('Invalid email\n"name@domain.com"');
   });
 
   StreamTransformer<String, String> passwordValidator =
