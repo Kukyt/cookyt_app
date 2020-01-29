@@ -3,7 +3,7 @@ import 'package:cookyt_app/src/Widgets/login_sign_widgets/positioned_background.
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_raised_button.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/blocs/managers/signup_form_manager.dart';
-import 'package:cookyt_app/src/provider.dart';
+import 'package:cookyt_app/settings/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/styles/log_sign_styles.dart';
 import 'package:flutter/material.dart';

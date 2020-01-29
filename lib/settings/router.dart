@@ -2,6 +2,7 @@ import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/screens/login_screen.dart';
 import 'package:cookyt_app/src/screens/profile_screen.dart';
 import 'package:cookyt_app/src/screens/signup_screen.dart';
+import 'package:cookyt_app/src/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -25,6 +26,9 @@ class Router {
           child: SignupScreen(),
           type: PageTransitionType.fade,
         );
+
+      case SplashScreen.id:
+        return MaterialPageRoute(builder: (context) => SplashScreen(context));
 
       default:
         return MaterialPageRoute(

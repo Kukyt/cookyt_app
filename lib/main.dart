@@ -1,7 +1,7 @@
 import 'package:cookyt_app/src/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'src/provider.dart';
-import 'src/router.dart';
+import 'settings/provider.dart';
+import 'settings/router.dart';
 
 void main() => runApp(App());
 
@@ -17,7 +17,7 @@ class App extends StatelessWidget {
           splashColor: Colors.greenAccent,
           accentColor: Colors.green[50],
         ),
-        home: SplashScreen(),
+        initialRoute: SplashScreen.id,
         onGenerateRoute: Router.generateRoute,
       ),
     );

@@ -3,8 +3,8 @@ import 'package:rxdart/rxdart.dart';
 
 class SignUpFormManager with FormValidatorMixin {
   final _name = BehaviorSubject<String>();
-  Stream<String> get name$ => _password.stream.transform(nameValidator);
-  Function(String) get setName => _password.sink.add;
+  Stream<String> get name$ => _name.stream.transform(nameValidator);
+  Function(String) get setName => _name.sink.add;
 
   final _email = BehaviorSubject<String>();
   Stream<String> get email$ => _email.stream.transform(emailValidator);
@@ -15,7 +15,12 @@ class SignUpFormManager with FormValidatorMixin {
   Function(String) get setPassword => _password.sink.add;
 
   Stream<bool> get isFormValid$ =>
-      CombineLatestStream([name$ ,email$, password$], (values) => true);
+      CombineLatestStream.combine3(name$ ,email$, password$, (name, email, password){
+        if ( name == _name.value && email == _email.value && password == _password.value) {
+          return true;
+        } else
+          return false;
+      });
 
   void submit() {
     print(_name);

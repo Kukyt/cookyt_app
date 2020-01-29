@@ -5,17 +5,10 @@ import 'package:cookyt_app/src/styles/splash_screen_styles.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
-class SplashScreen extends StatefulWidget {
-  SplashScreen({Key key}) : super(key: key);
+class SplashScreen extends StatelessWidget {
+  static const id = 'splash_screen';
 
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
+  SplashScreen(BuildContext context){
     Timer(
       Duration(seconds: 2),
       () => Navigator.pushReplacementNamed(

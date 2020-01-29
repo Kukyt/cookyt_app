@@ -1,10 +1,10 @@
 import 'package:cookyt_app/src/Widgets/login_sign_widgets/cookit_title.dart';
-import 'package:cookyt_app/src/Widgets/login_sign_widgets/signup_with_button.dart';
+import 'package:cookyt_app/src/Widgets/login_sign_widgets/signupwith_button.dart';
 import 'package:cookyt_app/src/Widgets/login_sign_widgets/positioned_background.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_raised_button.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/blocs/managers/login_form_manager.dart';
-import 'package:cookyt_app/src/provider.dart';
+import 'package:cookyt_app/settings/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/screens/signup_screen.dart';
 import 'package:cookyt_app/src/styles/log_sign_styles.dart';

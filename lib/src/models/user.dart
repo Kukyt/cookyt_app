@@ -7,7 +7,7 @@ class User {
   final String profilePhotoUrl;
   final int followers;
   final int following;
-  final int  recipes;
+  final int recipes;
 
   User(
       {@required this.nickName,
