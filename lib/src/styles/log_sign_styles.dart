@@ -4,14 +4,16 @@ InputDecoration rxTextFieldDecoration({String hintText}) {
   return InputDecoration(
     errorStyle: TextStyle(
         fontFamily: 'Baloo Bhai',
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.bold,
         fontSize: 17.0),
+        errorMaxLines: 5,
     filled: true,
     fillColor: Colors.white,
     hintText: hintText,
     contentPadding: const EdgeInsets.only(left: 14.0),
     focusedBorder: _textFieldBorder,
+    focusedErrorBorder: _textFieldBorder,
     enabledBorder: _textFieldBorder,
     errorBorder: _textFieldBorder,
     border: _textFieldBorder,
