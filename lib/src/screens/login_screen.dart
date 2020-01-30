@@ -35,9 +35,12 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ///The cookit title
-              Hero(
-                tag: 'logo',
-                child: CookitTitle(),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Hero(
+                  tag: 'logo',
+                  child: CookitTitle(),
+                ),
               ),
 
               ///Reactive text fields

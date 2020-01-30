@@ -7,7 +7,7 @@ class CookitTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      type: MaterialType.transparency,
+      color: Colors.transparent,
       child: Text('Cookit', style: cookytLogoStyle),
     );
   }

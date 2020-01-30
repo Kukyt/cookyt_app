@@ -5,7 +5,11 @@ class BgDecorations {
     gradient: LinearGradient(
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
-      colors: [Colors.greenAccent, Colors.teal, Colors.tealAccent],
+      colors: [
+        Colors.greenAccent,
+        Colors.teal.withOpacity(0.6),
+        Colors.tealAccent,
+      ],
     ),
   );
 }

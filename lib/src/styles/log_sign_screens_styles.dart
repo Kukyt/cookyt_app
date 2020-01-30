@@ -29,7 +29,7 @@ final hintTextStyle = TextStyle(
 
 final _textFieldBorder = UnderlineInputBorder(
   borderSide: BorderSide(color: Colors.white),
-  borderRadius: BorderRadius.circular(8),
+  borderRadius: BorderRadius.circular(7),
 );
 
 TextStyle loginTextStyle({TextDecoration decoration = TextDecoration.none}) {
