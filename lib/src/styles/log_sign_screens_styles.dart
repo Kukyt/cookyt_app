@@ -4,8 +4,8 @@ InputDecoration rxTextFieldDecoration({String hintText}) {
   return InputDecoration(
     errorStyle: TextStyle(
         fontFamily: 'Baloo Bhai',
-        color: Colors.black54,
-        fontWeight: FontWeight.bold,
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
         fontSize: 17.0),
         errorMaxLines: 5,
     filled: true,
@@ -29,7 +29,7 @@ final hintTextStyle = TextStyle(
 
 final _textFieldBorder = UnderlineInputBorder(
   borderSide: BorderSide(color: Colors.white),
-  borderRadius: BorderRadius.circular(10),
+  borderRadius: BorderRadius.circular(8),
 );
 
 TextStyle loginTextStyle({TextDecoration decoration = TextDecoration.none}) {

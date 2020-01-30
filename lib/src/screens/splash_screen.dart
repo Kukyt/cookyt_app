@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cookyt_app/src/Widgets/login_sign_widgets/cookit_title.dart';
-import 'package:cookyt_app/src/Widgets/login_sign_widgets/positioned_background.dart';
+import 'package:cookyt_app/src/styles/background_decorations.dart/bg_decorations.dart';
 import 'package:cookyt_app/src/styles/splash_screen_styles.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
@@ -21,18 +21,18 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        positionedBackground,
-        Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CookitTitle(),
-              Text('Cook your life', style: brandPhraseStyle),
-            ],
-          ),
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BgDecorations.tealDecoration,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CookitTitle(),
+            Text('Cook your life', style: brandPhraseStyle),
+          ],
         ),
-      ]),
+      ),
     );
   }
 }

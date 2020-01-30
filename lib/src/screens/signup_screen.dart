@@ -1,10 +1,10 @@
 import 'package:cookyt_app/src/Widgets/login_sign_widgets/cookit_title.dart';
-import 'package:cookyt_app/src/Widgets/login_sign_widgets/positioned_background.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_raised_button.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/blocs/managers/signup_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
+import 'package:cookyt_app/src/styles/background_decorations.dart/bg_decorations.dart';
 import 'package:cookyt_app/src/styles/log_sign_screens_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -24,21 +24,18 @@ class SignupScreen extends StatelessWidget {
     final Size mediaSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Stack(overflow: Overflow.visible, children: [
-        ///The Positioned object with the background image
-        positionedBackground,
-
-        ///Here is build all the page widget structure
-        SingleChildScrollView(
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BgDecorations.tealDecoration,
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ///The cookit title
-              Padding(
-                padding: EdgeInsets.only(top: mediaSize.height * 0.16),
-                child: Hero(
-                  tag: 'logo',
-                  child: CookitTitle(),
-                ),
+              Hero(
+                tag: 'logo',
+                child: CookitTitle(),
               ),
 
               ///Reactive text Fields
@@ -57,7 +54,7 @@ class SignupScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(
-                    mediaSize.width * 0.12, 40.0, mediaSize.width * 0.12, 40.0),
+                    mediaSize.width * 0.12, 35.0, mediaSize.width * 0.12, 35.0),
                 child: RxTextField(
                   suscribe: manager.email$,
                   dispatch: manager.setEmail,
@@ -110,7 +107,7 @@ class SignupScreen extends StatelessWidget {
             ],
           ),
         ),
-      ]),
+      ),
     );
   }
 }

@@ -13,9 +13,9 @@ class App extends StatelessWidget {
         title: "Kukyt App",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.green[200],
+          primaryColor: Colors.teal,
           splashColor: Colors.greenAccent,
-          accentColor: Colors.green[50],
+          accentColor: Colors.tealAccent,
         ),
         initialRoute: SplashScreen.id,
         onGenerateRoute: Router.generateRoute,
