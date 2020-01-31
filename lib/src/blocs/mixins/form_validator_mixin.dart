@@ -5,6 +5,7 @@ mixin FormValidatorMixin {
       r'^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
   static final RegExp _validPassword =
       RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$');
+  static final RegExp _validName = RegExp(r'^(?=.{4,20}$)(?!.*[_.]{2})[a-zA-Z0-9._]+$');
 
   StreamTransformer<String, String> emailValidator =
       StreamTransformer.fromHandlers(handleData: (value, sink) {
@@ -24,10 +25,10 @@ mixin FormValidatorMixin {
 
   StreamTransformer<String, String> nameValidator =
       StreamTransformer.fromHandlers(handleData: (value, sink) {
-    if (value.trim().isEmpty) {
-      sink.addError("Enter a valid name");
-    } else {
+    if (_validName.hasMatch(value.toLowerCase())) {
       sink.add(value);
+    } else {
+      sink.addError("Enter a valid name");
     }
   });
 }

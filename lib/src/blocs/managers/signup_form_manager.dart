@@ -2,35 +2,56 @@ import 'package:cookyt_app/src/blocs/mixins/form_validator_mixin.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignUpFormManager with FormValidatorMixin {
-  final _name = BehaviorSubject<String>();
-  Stream<String> get name$ => _name.stream.transform(nameValidator);
-  Function(String) get setName => _name.sink.add;
+  //Subjects
+  final _nameFetcher = BehaviorSubject<String>();
+  final _emailFetcher = BehaviorSubject<String>();
+  final _passwordFetcher = BehaviorSubject<String>();
+  final _buttonState = BehaviorSubject<bool>();
 
-  final _email = BehaviorSubject<String>();
-  Stream<String> get email$ => _email.stream.transform(emailValidator);
-  Function(String) get setEmail => _email.sink.add;
+  final _nameOut = PublishSubject<String>();
+  final _emailOut = PublishSubject<String>();
+  final _passwordOut = PublishSubject<String>();
 
-  final _password = BehaviorSubject<String>();
-  Stream<String> get password$ => _password.stream.transform(passwordValidator);
-  Function(String) get setPassword => _password.sink.add;
-
+  //Streams
+  Stream<String> get name$ => _nameOut.stream.transform(nameValidator);
+  Stream<String> get email$ => _emailOut.stream.transform(emailValidator);
+  Stream<String> get password$ => _passwordOut.stream.transform(passwordValidator);
+  Stream<bool> get _buttonState$ => _buttonState.stream;
   Stream<bool> get isFormValid$ =>
-      CombineLatestStream.combine3(name$ ,email$, password$, (name, email, password){
-        if ( name == _name.value && email == _email.value && password == _password.value) {
+      CombineLatestStream.combine4(name$, email$, password$, _buttonState$,
+          (name, email, password, buttonPressed) {
+        if (name == _nameFetcher.value &&
+            email == _emailFetcher.value &&
+            password == _passwordFetcher.value && !buttonPressed)
           return true;
-        } else
+        else
           return false;
       });
 
-  void submit() {
-    print(_name);
-    print(_email.value);
-    print(_password.value);
+  //Sinks
+  Function(String) get setName => _nameFetcher.sink.add;
+  Function(String) get setEmail => _emailFetcher.sink.add;
+  Function(String) get setPassword => _passwordFetcher.sink.add;
+  Function(bool) get buttonPressed => _buttonState.sink.add;
+
+  //Values
+  String get nameValue => _nameFetcher.value;
+  String get emailValue => _emailFetcher.value;
+  String get passwordValue => _passwordFetcher.value;
+
+  SignUpFormManager(){
+    _nameFetcher.pipe(_nameOut);
+    _emailFetcher.pipe(_emailOut);
+    _passwordFetcher.pipe(_passwordOut);
   }
 
   void dispose() {
-    _name.close();
-    _email.close();
-    _password.close();
+    _nameOut.close();
+    _emailOut.close();
+    _passwordOut.close();
+    _nameFetcher.close();
+    _emailFetcher.close();
+    _passwordFetcher.close();
+    _buttonState.close();
   }
 }

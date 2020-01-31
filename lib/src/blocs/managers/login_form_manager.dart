@@ -2,30 +2,46 @@ import 'package:cookyt_app/src/blocs/mixins/form_validator_mixin.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginFormManager with FormValidatorMixin {
-  final _email = BehaviorSubject<String>();
-  Stream<String> get email$ => _email.stream.transform(emailValidator);
-  Function(String) get setEmail => _email.sink.add;
+  //Subjects
+  final _emailFetcher = BehaviorSubject<String>();
+  final _passwordFetcher = BehaviorSubject<String>();
+  final _isButtonPressed = BehaviorSubject<bool>();
 
-  final _password = BehaviorSubject<String>();
-  Stream<String> get password$ => _password.stream.transform(passwordValidator);
-  Function(String) get setPassword => _password.sink.add;
+  final _emailOut = PublishSubject<String>();
+  final _passwordOut = PublishSubject<String>();
 
+  //Streams
+  Stream<String> get email$ => _emailOut.stream.transform(emailValidator);
+  Stream<String> get password$ => _passwordOut.stream.transform(passwordValidator);
+  Stream<bool> get buttonState$ => _isButtonPressed.stream;
   Stream<bool> get isFormValid$ =>
-      CombineLatestStream.combine2<String, String, bool>(email$, password$,
-          (email, password) {
-        if (email == _email.value && password == _password.value) {
+      CombineLatestStream.combine3<String, String, bool,bool>(email$, password$, buttonState$ ,
+          (email, password, buttonPressed) {
+        if (email == _emailFetcher.value && password == _passwordFetcher.value && !buttonPressed)
           return true;
-        } else
+        else
           return false;
       });
 
-  void submit() {
-    print(_email.value);
-    print(_password.value);
+  //Sinks
+  Function(String) get setEmail => _emailFetcher.sink.add;
+  Function(String) get setPassword => _passwordFetcher.sink.add;
+  Function(bool) get buttonPressed => _isButtonPressed.sink.add;
+
+  //Values
+  String get emailValue => _emailFetcher.value;
+  String get passwordValue => _passwordFetcher.value;
+
+  LoginFormManager(){
+    _emailFetcher.pipe(_emailOut);
+    _passwordFetcher.pipe(_passwordOut);
   }
 
   void dispose() {
-    _email.close();
-    _password.close();
+    _emailOut.close();
+    _passwordOut.close();
+    _emailFetcher.close();
+    _passwordFetcher.close();
+    _isButtonPressed.close();
   }
 }

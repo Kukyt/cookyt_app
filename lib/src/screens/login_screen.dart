@@ -1,28 +1,44 @@
 import 'package:cookyt_app/src/Widgets/login_sign_widgets/cookit_title.dart';
+import 'package:cookyt_app/src/Widgets/login_sign_widgets/cupertino_dialog.dart';
 import 'package:cookyt_app/src/Widgets/login_sign_widgets/signupwith_button.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_raised_button.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
+import 'package:cookyt_app/src/blocs/managers/auth_manager.dart';
 import 'package:cookyt_app/src/blocs/managers/login_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/screens/signup_screen.dart';
 import 'package:cookyt_app/src/styles/background_decorations.dart/bg_decorations.dart';
 import 'package:cookyt_app/src/styles/log_sign_screens_styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = 'login_screen';
 
   /// The submit function try to login the user into the app
-  _submit(context, manager) {
-    manager.submit();
-    Navigator.pushReplacementNamed(context, FeedScreen.id);
+  Future _login(
+      context, LoginFormManager manager, AuthManager authManager) async {
+    try {
+      await authManager.login(manager.emailValue, manager.passwordValue);
+      Navigator.pushNamed(context, FeedScreen.id);
+    } catch (err) {
+      showCupertinoDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoDialogSingleAction(
+              content: err.message,
+              onPressed: () => Navigator.pop(context),
+            );
+          });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final LoginFormManager manager =
         Provider.of(context).fetch(LoginFormManager);
+    final AuthManager authManager = Provider.of(context).fetch(AuthManager);
     final Size mediaSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -74,18 +90,22 @@ class LoginScreen extends StatelessWidget {
 
               ///Reactive Login button
               RxRaisedButton(
-                suscribe: manager.isFormValid$,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 60.0,
-                  vertical: 5.0,
-                ),
-                child: Text('Login', style: loginTextStyle()),
-                color: Colors.tealAccent,
-                onPressed: () => _submit(context, manager),
-              ),
+                  suscribe: manager.isFormValid$,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 60.0,
+                    vertical: 5.0,
+                  ),
+                  child: Text('Login', style: loginTextStyle()),
+                  color: Colors.tealAccent,
+                  onPressed: () {
+                    manager.buttonPressed(true);
+                    _login(context, manager, authManager).then((_) {
+                      manager.buttonPressed(false);
+                    });
+                  }),
 
               ///Go to Signup Page for signup
               Padding(

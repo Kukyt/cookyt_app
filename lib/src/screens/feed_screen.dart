@@ -1,3 +1,5 @@
+import 'package:cookyt_app/settings/provider.dart';
+import 'package:cookyt_app/src/blocs/managers/auth_manager.dart';
 import 'package:flutter/material.dart';
 import 'profile_screen.dart';
 
@@ -13,6 +15,8 @@ class FeedScreen extends StatefulWidget {
 class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
+  final AuthManager auth = Provider.of(context).fetch(AuthManager);
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -29,6 +33,10 @@ class _FeedScreenState extends State<FeedScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.local_gas_station),
+        onPressed: () => auth.logOut(context),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:cookyt_app/src/blocs/managers/auth_manager.dart';
 import 'package:cookyt_app/src/blocs/managers/login_form_manager.dart';
 import 'package:cookyt_app/src/blocs/managers/signup_form_manager.dart';
 
@@ -7,6 +8,7 @@ class Overseer {
   Overseer() {
     register(LoginFormManager, LoginFormManager());
     register(SignUpFormManager, SignUpFormManager());
+    register(AuthManager, AuthManager());
   }
 
   void register(name, object) {

@@ -1,26 +1,53 @@
 import 'package:cookyt_app/src/Widgets/login_sign_widgets/cookit_title.dart';
+import 'package:cookyt_app/src/Widgets/login_sign_widgets/cupertino_dialog.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_raised_button.dart';
 import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
+import 'package:cookyt_app/src/blocs/managers/auth_manager.dart';
 import 'package:cookyt_app/src/blocs/managers/signup_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
+import 'package:cookyt_app/src/screens/login_screen.dart';
 import 'package:cookyt_app/src/styles/background_decorations.dart/bg_decorations.dart';
 import 'package:cookyt_app/src/styles/log_sign_screens_styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatelessWidget {
   static const String id = 'signup_screen';
 
   /// The submit function try to register a user into firebase
-  _submit(context, manager) {
-    manager.submit();
-    Navigator.pushReplacementNamed(context, FeedScreen.id);
+  Future _signUp(
+      context, SignUpFormManager manager, AuthManager authManager) async {
+    try {
+      await authManager.signup(
+          manager.nameValue, manager.emailValue, manager.passwordValue);
+      showCupertinoDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoDialogSingleAction(
+              content:
+                  "Credentials accepted! We're sending you a confirmation email, please respond.",
+              onPressed: () =>
+                  Navigator.popAndPushNamed(context, FeedScreen.id),
+            );
+          });
+    } catch (err) {
+      showCupertinoDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoDialogSingleAction(
+              content: err.message,
+              onPressed: () => Navigator.pop(context),
+            );
+          });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final SignUpFormManager manager =
         Provider.of(context).fetch(SignUpFormManager);
+    final AuthManager authManager = Provider.of(context).fetch(AuthManager);
     final Size mediaSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -91,7 +118,12 @@ class SignupScreen extends StatelessWidget {
                   ),
                   child: Text('Signup', style: loginTextStyle()),
                   color: Colors.tealAccent,
-                  onPressed: () => _submit(context, manager)),
+                  onPressed: () {
+                    manager.buttonPressed(true);
+                    _signUp(context, manager, authManager).then((_) {
+                      manager.buttonPressed(false);
+                    });
+                  }),
 
               ///Back to login InkWell
               Padding(
@@ -101,7 +133,9 @@ class SignupScreen extends StatelessWidget {
                     'Back to login',
                     style: loginTextStyle(decoration: TextDecoration.underline),
                   ),
-                  onTap: () => Navigator.pop(context),
+                  onTap: () {
+                    Navigator.pop(context, LoginScreen.id);
+                  } ,
                 ),
               ),
             ],
