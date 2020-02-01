@@ -108,7 +108,7 @@ class SignupScreen extends StatelessWidget {
                     vertical: 5.0,
                   ),
                   child: Text('Signup', style: textStyle()),
-                  color: Colors.tealAccent,
+                  color: Theme.of(context).accentColor,
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
                     await _signUp(context, manager, authManager);

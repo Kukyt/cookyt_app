@@ -151,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                     vertical: 5.0,
                   ),
                   child: Text('Login', style: textStyle()),
-                  color: Colors.tealAccent,
+                  color: Theme.of(context).accentColor,
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
                     await _login(context, manager, authManager);

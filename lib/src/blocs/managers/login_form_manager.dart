@@ -13,14 +13,15 @@ class LoginFormManager with FormValidatorMixin {
   Stream<String> get password$ =>
       _passwordOut.stream.transform(passwordValidator);
   Stream<bool> get isFormValid$ =>
-      CombineLatestStream.combine2<String, String, bool>(
-          email$, password$, (email, password) {
-            if(email == _emailFetcher.value && password == _passwordFetcher.value){
-              return true;
-            }else{
-              return false;
-            }
-          });
+      CombineLatestStream.combine2<String, String, bool>(email$, password$,
+          (email, password) {
+        if (email == _emailFetcher.value &&
+            password == _passwordFetcher.value) {
+          return true;
+        } else {
+          return false;
+        }
+      });
 
   //Sinks
   Function(String) get setEmail => _emailFetcher.sink.add;
