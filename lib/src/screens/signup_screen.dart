@@ -67,7 +67,7 @@ class SignupScreen extends StatelessWidget {
                   keyboardType: TextInputType.text,
                   autofocus: false,
                   style: hintTextStyle,
-                  decoration: rxTextFieldDecoration(hintText: 'Name'),
+                  decoration: textFieldDecoration(hintText: 'Name'),
                 ),
               ),
               Padding(
@@ -80,7 +80,7 @@ class SignupScreen extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   autofocus: false,
                   style: hintTextStyle,
-                  decoration: rxTextFieldDecoration(hintText: 'Email'),
+                  decoration: textFieldDecoration(hintText: 'Email'),
                 ),
               ),
               Padding(
@@ -94,7 +94,7 @@ class SignupScreen extends StatelessWidget {
                   keyboardAppearance: Brightness.dark,
                   keyboardType: TextInputType.visiblePassword,
                   style: hintTextStyle,
-                  decoration: rxTextFieldDecoration(hintText: 'Password'),
+                  decoration: textFieldDecoration(hintText: 'Password'),
                 ),
               ),
 
@@ -109,11 +109,9 @@ class SignupScreen extends StatelessWidget {
                   ),
                   child: Text('Signup', style: textStyle()),
                   color: Colors.tealAccent,
-                  onPressed: () {
-                    manager.buttonPressed(true);
-                    _signUp(context, manager, authManager).then((_) {
-                      manager.buttonPressed(false);
-                    });
+                  onPressed: () async {
+                    await _signUp(context, manager, authManager);
+                    FocusScope.of(context).unfocus();
                   }),
 
               ///Back to login InkWell

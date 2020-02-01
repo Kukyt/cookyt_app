@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -53,8 +54,8 @@ class AuthManager {
   }
 
   Future<FirebaseUser> signInWithFacebook() async {
-    FacebookLoginResult result =
-        await _facebookLogin.logInWithReadPermissions(['email', 'public_profile']);
+    FacebookLoginResult result = await _facebookLogin
+        .logInWithReadPermissions(['email', 'public_profile']);
     if (result != null) {
       AuthResult authResult = await _firebaseAuth.signInWithCredential(
         FacebookAuthProvider.getCredential(
@@ -79,5 +80,9 @@ class AuthManager {
   Future<void> sendVerificationEmail() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     await user.sendEmailVerification();
+  }
+
+  Future<void> sendPasswordResetEmail({@required String email}) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 }

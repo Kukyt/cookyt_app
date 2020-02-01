@@ -6,6 +6,7 @@ import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/blocs/managers/auth_manager.dart';
 import 'package:cookyt_app/src/blocs/managers/login_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
+import 'package:cookyt_app/src/screens/recover_password_screen.dart';
 import 'package:cookyt_app/src/screens/signup_screen.dart';
 import 'package:cookyt_app/src/styles/background_decorations.dart/bg_decorations.dart';
 import 'package:cookyt_app/src/styles/general_styles.dart';
@@ -105,12 +106,12 @@ class LoginScreen extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   autofocus: false,
                   style: hintTextStyle,
-                  decoration: rxTextFieldDecoration(hintText: 'Email'),
+                  decoration: textFieldDecoration(hintText: 'Email'),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: mediaSize.width * 0.12, vertical: 40.0),
+                padding: EdgeInsets.fromLTRB(
+                    mediaSize.width * 0.12, 40.0, mediaSize.width * 0.12, 18.0),
                 child: RxTextField(
                   suscribe: manager.password$,
                   dispatch: manager.setPassword,
@@ -119,9 +120,25 @@ class LoginScreen extends StatelessWidget {
                   keyboardAppearance: Brightness.dark,
                   keyboardType: TextInputType.visiblePassword,
                   style: hintTextStyle,
-                  decoration: rxTextFieldDecoration(hintText: 'Password'),
+                  decoration: textFieldDecoration(hintText: 'Password'),
                 ),
               ),
+
+              InkWell(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        bottom: 10.0, right: mediaSize.width * 0.10),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "Forgot your password?",
+                      style: textStyle(decoration: TextDecoration.underline)
+                          .copyWith(fontSize: 20.0),
+                    ),
+                  ),
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    Navigator.pushNamed(context, RecoverPasswordScreen.id);
+                  }),
 
               ///Reactive Login button
               RxRaisedButton(
@@ -135,11 +152,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: Text('Login', style: textStyle()),
                   color: Colors.tealAccent,
-                  onPressed: () {
-                    manager.buttonPressed(true);
-                    _login(context, manager, authManager).then((_) {
-                      manager.buttonPressed(false);
-                    });
+                  onPressed: () async {
+                    FocusScope.of(context).unfocus();
+                    await _login(context, manager, authManager);
                   }),
 
               ///Go to Signup Page for signup

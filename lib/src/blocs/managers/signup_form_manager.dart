@@ -6,8 +6,6 @@ class SignUpFormManager with FormValidatorMixin {
   final _nameFetcher = BehaviorSubject<String>();
   final _emailFetcher = BehaviorSubject<String>();
   final _passwordFetcher = BehaviorSubject<String>();
-  final _buttonState = BehaviorSubject<bool>();
-
   final _nameOut = PublishSubject<String>();
   final _emailOut = PublishSubject<String>();
   final _passwordOut = PublishSubject<String>();
@@ -15,31 +13,31 @@ class SignUpFormManager with FormValidatorMixin {
   //Streams
   Stream<String> get name$ => _nameOut.stream.transform(nameValidator);
   Stream<String> get email$ => _emailOut.stream.transform(emailValidator);
-  Stream<String> get password$ => _passwordOut.stream.transform(passwordValidator);
-  Stream<bool> get _buttonState$ => _buttonState.stream;
+  Stream<String> get password$ =>
+      _passwordOut.stream.transform(passwordValidator);
   Stream<bool> get isFormValid$ =>
-      CombineLatestStream.combine4(name$, email$, password$, _buttonState$,
-          (name, email, password, buttonPressed) {
+      CombineLatestStream.combine3(name$, email$, password$,
+          (name, email, password) {
         if (name == _nameFetcher.value &&
             email == _emailFetcher.value &&
-            password == _passwordFetcher.value && !buttonPressed)
+            password == _passwordFetcher.value) {
           return true;
-        else
+        } else {
           return false;
+        }
       });
 
   //Sinks
   Function(String) get setName => _nameFetcher.sink.add;
   Function(String) get setEmail => _emailFetcher.sink.add;
   Function(String) get setPassword => _passwordFetcher.sink.add;
-  Function(bool) get buttonPressed => _buttonState.sink.add;
 
   //Values
   String get nameValue => _nameFetcher.value;
   String get emailValue => _emailFetcher.value;
   String get passwordValue => _passwordFetcher.value;
 
-  SignUpFormManager(){
+  SignUpFormManager() {
     _nameFetcher.pipe(_nameOut);
     _emailFetcher.pipe(_emailOut);
     _passwordFetcher.pipe(_passwordOut);
@@ -52,6 +50,5 @@ class SignUpFormManager with FormValidatorMixin {
     _nameFetcher.close();
     _emailFetcher.close();
     _passwordFetcher.close();
-    _buttonState.close();
   }
 }

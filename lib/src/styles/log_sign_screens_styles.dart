@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InputDecoration rxTextFieldDecoration({String hintText}) {
+InputDecoration textFieldDecoration({String hintText}) {
   return InputDecoration(
     errorStyle: TextStyle(
         fontFamily: 'Baloo Bhai',
