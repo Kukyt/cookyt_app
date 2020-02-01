@@ -1,5 +1,3 @@
-import 'package:cookyt_app/settings/provider.dart';
-import 'package:cookyt_app/src/blocs/managers/signup_form_manager.dart';
 import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/screens/landing_screen.dart';
 import 'package:cookyt_app/src/screens/profile_screen.dart';
