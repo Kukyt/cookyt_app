@@ -1,7 +1,8 @@
 import '../models/user.dart';
 
 final User currentUser = User(
-  nickName: "@mike.rak",
+  uid: "3245sf123",
+  username: "@mike.rak",
   name: "Mike Thompson",
   description:
       "Football player ⚽️\nVegan 🌱🐻 🐼 \nTraveler ✈️ \nSoftware engineering 💻\n",

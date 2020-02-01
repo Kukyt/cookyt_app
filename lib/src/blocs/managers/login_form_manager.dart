@@ -33,6 +33,7 @@ class LoginFormManager with FormValidatorMixin {
   String get passwordValue => _passwordFetcher.value;
 
   LoginFormManager(){
+    _isButtonPressed.add(false);
     _emailFetcher.pipe(_emailOut);
     _passwordFetcher.pipe(_passwordOut);
   }

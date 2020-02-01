@@ -31,14 +31,3 @@ final _textFieldBorder = UnderlineInputBorder(
   borderSide: BorderSide(color: Colors.white),
   borderRadius: BorderRadius.circular(7),
 );
-
-TextStyle loginTextStyle({TextDecoration decoration = TextDecoration.none}) {
-  return TextStyle(
-    fontFamily: 'Baloo Bhai',
-    decoration: decoration,
-    decorationThickness: 2.0,
-    color: Colors.white,
-    fontSize: 23.0,
-    fontWeight: FontWeight.bold,
-  );
-}

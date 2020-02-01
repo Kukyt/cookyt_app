@@ -36,7 +36,7 @@ class _FeedScreenState extends State<FeedScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.local_gas_station),
-        onPressed: () => auth.logOut(context),
+        onPressed: () => auth.signOut(),
       ),
     );
   }

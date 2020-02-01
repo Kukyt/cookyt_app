@@ -6,9 +6,9 @@ import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/blocs/managers/auth_manager.dart';
 import 'package:cookyt_app/src/blocs/managers/login_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
-import 'package:cookyt_app/src/screens/feed_screen.dart';
 import 'package:cookyt_app/src/screens/signup_screen.dart';
 import 'package:cookyt_app/src/styles/background_decorations.dart/bg_decorations.dart';
+import 'package:cookyt_app/src/styles/general_styles.dart';
 import 'package:cookyt_app/src/styles/log_sign_screens_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,17 +20,52 @@ class LoginScreen extends StatelessWidget {
   Future _login(
       context, LoginFormManager manager, AuthManager authManager) async {
     try {
-      await authManager.login(manager.emailValue, manager.passwordValue);
-      Navigator.pushNamed(context, FeedScreen.id);
+      await authManager.signIn(manager.emailValue, manager.passwordValue);
     } catch (err) {
       showCupertinoDialog(
-          context: context,
-          builder: (context) {
-            return CupertinoDialogSingleAction(
-              content: err.message,
-              onPressed: () => Navigator.pop(context),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return CupertinoDialogSingleAction(
+            content: err.message,
+            onPressed: () => Navigator.pop(context),
+          );
+        },
+      );
+    }
+  }
+
+  Future _signInWithGoogle(
+      BuildContext context, AuthManager authManager) async {
+    try {
+      await authManager.signInWithGoogle();
+    } catch (err) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoDialogSingleAction(
+            content: err.message,
+            onPressed: () => Navigator.pop(context),
+          );
+        },
+      );
+    }
+  }
+
+  Future _signInWithFacebook(
+      BuildContext context, AuthManager authManager) async {
+    try {
+      await authManager.signInWithFacebook();
+      await authManager.sendVerificationEmail();
+    } catch (err) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoDialogSingleAction(
+            content: err.message,
+            onPressed: () => Navigator.pop(context),
+          );
+        },
+      );
     }
   }
 
@@ -98,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                     horizontal: 60.0,
                     vertical: 5.0,
                   ),
-                  child: Text('Login', style: loginTextStyle()),
+                  child: Text('Login', style: textStyle()),
                   color: Colors.tealAccent,
                   onPressed: () {
                     manager.buttonPressed(true);
@@ -115,13 +150,13 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(right: 6.0),
-                      child: Text('New?', style: loginTextStyle()),
+                      child: Text('New?', style: textStyle()),
                     ),
                     InkWell(
                         child: Text(
                           'Signup here',
-                          style: loginTextStyle(
-                              decoration: TextDecoration.underline),
+                          style:
+                              textStyle(decoration: TextDecoration.underline),
                           softWrap: true,
                         ),
                         onTap: () {
@@ -133,8 +168,8 @@ class LoginScreen extends StatelessWidget {
               ),
 
               ///RegisterWith Buttons
-              Text('─  OR  ─', style: loginTextStyle()),
-              Text('Signup with', style: loginTextStyle()),
+              Text('─  OR  ─', style: textStyle()),
+              Text('Signup with', style: textStyle()),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 20.0),
                 child: Row(
@@ -142,11 +177,11 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     SignUpWithButton(
                       imagePath: 'assets/images/logos/google.png',
-                      onTap: () => print('Google was pressed'),
+                      onTap: () => _signInWithGoogle(context, authManager),
                     ),
                     SignUpWithButton(
                       imagePath: 'assets/images/logos/facebook.png',
-                      onTap: () => print('Facebook was pressed'),
+                      onTap: () => _signInWithFacebook(context, authManager),
                     )
                   ],
                 ),

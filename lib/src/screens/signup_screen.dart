@@ -5,9 +5,8 @@ import 'package:cookyt_app/src/Widgets/rx_widgets/rx_text_field.dart';
 import 'package:cookyt_app/src/blocs/managers/auth_manager.dart';
 import 'package:cookyt_app/src/blocs/managers/signup_form_manager.dart';
 import 'package:cookyt_app/settings/provider.dart';
-import 'package:cookyt_app/src/screens/feed_screen.dart';
-import 'package:cookyt_app/src/screens/login_screen.dart';
 import 'package:cookyt_app/src/styles/background_decorations.dart/bg_decorations.dart';
+import 'package:cookyt_app/src/styles/general_styles.dart';
 import 'package:cookyt_app/src/styles/log_sign_screens_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +20,8 @@ class SignupScreen extends StatelessWidget {
     try {
       await authManager.signup(
           manager.nameValue, manager.emailValue, manager.passwordValue);
-      showCupertinoDialog(
-          context: context,
-          builder: (context) {
-            return CupertinoDialogSingleAction(
-              content:
-                  "Credentials accepted! We're sending you a confirmation email, please respond.",
-              onPressed: () =>
-                  Navigator.popAndPushNamed(context, FeedScreen.id),
-            );
-          });
+      await authManager.sendVerificationEmail();
+      Navigator.pop(context);
     } catch (err) {
       showCupertinoDialog(
           context: context,
@@ -116,7 +107,7 @@ class SignupScreen extends StatelessWidget {
                     horizontal: 30.0,
                     vertical: 5.0,
                   ),
-                  child: Text('Signup', style: loginTextStyle()),
+                  child: Text('Signup', style: textStyle()),
                   color: Colors.tealAccent,
                   onPressed: () {
                     manager.buttonPressed(true);
@@ -131,11 +122,11 @@ class SignupScreen extends StatelessWidget {
                 child: InkWell(
                   child: Text(
                     'Back to login',
-                    style: loginTextStyle(decoration: TextDecoration.underline),
+                    style: textStyle(decoration: TextDecoration.underline),
                   ),
                   onTap: () {
-                    Navigator.pop(context, LoginScreen.id);
-                  } ,
+                    Navigator.pop(context);
+                  },
                 ),
               ),
             ],

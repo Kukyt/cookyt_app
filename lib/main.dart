@@ -13,7 +13,7 @@ class App extends StatelessWidget {
         title: "Kukyt App",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.teal,
+          primarySwatch: Colors.teal,
           accentColor: Colors.greenAccent,
         ),
         initialRoute: SplashScreen.id,

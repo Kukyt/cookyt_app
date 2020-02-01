@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onPressed: () => Navigator.pop(context),
       ),
       title: Text(
-        user.nickName,
+        user.username,
         style: nickNameStyle,
       ),
       actions: <Widget>[

@@ -1,45 +1,83 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cookyt_app/src/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthManager {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final _db = Firestore.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FacebookLogin _facebookLogin = FacebookLogin();
 
-  Future<void> login(String email, String password) async {
-    await _firebaseAuth.signInWithEmailAndPassword(
+  Stream<FirebaseUser> get onAuthStateChanged =>
+      _firebaseAuth.onAuthStateChanged;
+
+  Future<FirebaseUser> signIn(String email, String password) async {
+    AuthResult result = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
+    return result.user;
   }
 
-  Future<void> signup(String username, String email, String password) async {
-    AuthResult authResult = await _firebaseAuth.createUserWithEmailAndPassword(
+  Future<FirebaseUser> signup(
+      String username, String email, String password) async {
+    AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    String userId = authResult.user.uid;
-    await _addUserToDb(uid: userId, username: username);
+    return result.user;
   }
 
-  Future<void> logOut(context) async {
+  Future<FirebaseUser> signInWithGoogle() async {
+    GoogleSignIn googleSignIn = GoogleSignIn();
+    GoogleSignInAccount googleAccount = await googleSignIn.signIn();
+    if (googleAccount != null) {
+      GoogleSignInAuthentication googleAuth =
+          await googleAccount.authentication;
+      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
+        AuthResult result = await _firebaseAuth.signInWithCredential(
+          GoogleAuthProvider.getCredential(
+            idToken: googleAuth.idToken,
+            accessToken: googleAuth.accessToken,
+          ),
+        );
+        return result.user;
+      } else {
+        throw PlatformException(
+          code: "ERROR_MISSING_GOOGLE_AUTH_TOKEN",
+          message: "Missing google Auth token",
+        );
+      }
+    } else {
+      throw PlatformException(
+        code: "ERROR_ABORTED_BY_USER",
+        message: "Sign in aborted by user",
+      );
+    }
+  }
+
+  Future<FirebaseUser> signInWithFacebook() async {
+    FacebookLoginResult result =
+        await _facebookLogin.logInWithReadPermissions(['email', 'public_profile']);
+    if (result != null) {
+      AuthResult authResult = await _firebaseAuth.signInWithCredential(
+        FacebookAuthProvider.getCredential(
+          accessToken: result.accessToken.token,
+        ),
+      );
+      return authResult.user;
+    } else {
+      throw PlatformException(
+        code: 'ERROR_ABORTED_BY_USER',
+        message: 'SignIn aborted by user',
+      );
+    }
+  }
+
+  Future<void> signOut() async {
+    await _facebookLogin.logOut();
+    await _googleSignIn.signOut();
     await _firebaseAuth.signOut();
-    Navigator.pushReplacementNamed(context, LoginScreen.id);
   }
 
-  Future<bool> isLogged() async {
-    final FirebaseUser user = await _firebaseAuth.currentUser();
-    return user != null;
-  }
-
-  Future<void> _addUserToDb({String username, String uid}) async {
-    await _db.collection("users").document(uid).setData({
-      "username": username,
-    });
-  }
-
-  Future<bool> _usernameInUse({String username}) async {
-    final result = await _db
-        .collection("users")
-        .where("username", isEqualTo: username)
-        .getDocuments();
-    return result.documents.isNotEmpty;
+  Future<void> sendVerificationEmail() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    await user.sendEmailVerification();
   }
 }

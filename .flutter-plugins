@@ -4,3 +4,6 @@ firebase_auth=/opt/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.15
 firebase_auth_web=/opt/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-0.1.2/
 firebase_core=/opt/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.3+2/
 firebase_core_web=/opt/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2/
+flutter_facebook_login=/opt/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_login-2.0.1/
+google_sign_in=/opt/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.1.1/
+google_sign_in_web=/opt/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.8.3/
