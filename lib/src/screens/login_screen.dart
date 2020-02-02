@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(
-                    mediaSize.width * 0.12, 40.0, mediaSize.width * 0.12, 18.0),
+                    mediaSize.width * 0.12, 40.0, mediaSize.width * 0.12, 13.0),
                 child: RxTextField(
                   suscribe: manager.password$,
                   dispatch: manager.setPassword,
@@ -125,20 +125,25 @@ class LoginScreen extends StatelessWidget {
               ),
 
               InkWell(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: 10.0, right: mediaSize.width * 0.10),
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "Forgot your password?",
-                      style: textStyle(decoration: TextDecoration.underline)
-                          .copyWith(fontSize: 20.0),
+                child: Container(
+                  padding: EdgeInsets.only(
+                      bottom: 10.0, right: mediaSize.width * 0.15),
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Forgot your password?",
+                    style: textStyle(decoration: TextDecoration.underline)
+                        .copyWith(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                      decorationThickness: 1.6,
                     ),
                   ),
-                  onTap: () {
-                    FocusScope.of(context).unfocus();
-                    Navigator.pushNamed(context, RecoverPasswordScreen.id);
-                  }),
+                ),
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  Navigator.pushNamed(context, RecoverPasswordScreen.id);
+                },
+              ),
 
               ///Reactive Login button
               RxRaisedButton(

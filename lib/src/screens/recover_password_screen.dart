@@ -44,6 +44,14 @@ class RecoverPasswordScreen extends StatelessWidget {
     Size mediaSize = MediaQuery.of(context).size;
     AuthManager auth = Provider.of(context).fetch(AuthManager);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.white,
+        ),
+        backgroundColor: Theme.of(context).accentColor,
+        onPressed: () => Navigator.pop(context),
+      ),
       body: Container(
         alignment: Alignment.center,
         decoration: BgDecorations.tealDecoration,
@@ -79,18 +87,13 @@ class RecoverPasswordScreen extends StatelessWidget {
                     vertical: 5.0,
                   ),
                   color: Theme.of(context).accentColor,
-                  onPressed: () =>
-                      _sendResetPasswordEmail(context, auth, textController.text),
+                  onPressed: () => _sendResetPasswordEmail(
+                      context, auth, textController.text),
                 ),
               ),
             ],
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_back_ios),
-        onPressed: () => Navigator.pop(context),
       ),
     );
   }
