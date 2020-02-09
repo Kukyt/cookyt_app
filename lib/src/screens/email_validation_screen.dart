@@ -28,11 +28,12 @@ class EmailValidationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthManager auth = Provider.of(context).fetch(AuthManager);
+    final mediaSize = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         label: Text(
           "SignOut",
-          style: textStyle(),
+          style: textStyle(fontSize: mediaSize.width * 0.05),
         ),
         onPressed: () => auth.signOut(),
       ),
@@ -49,11 +50,12 @@ class EmailValidationScreen extends StatelessWidget {
                     vertical: 20.0),
                 child: Text(
                   "We send you a verification email, please check your inbox!\n If you haven't received any email, press the button below",
-                  style: textStyle(),
+                  style: textStyle(fontSize: mediaSize.width * 0.055),
                 ),
               ),
               RaisedButton(
-                child: Text("Resend email", style: textStyle()),
+                child: Text("Resend email",
+                    style: textStyle(fontSize: mediaSize.width * 0.05)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),

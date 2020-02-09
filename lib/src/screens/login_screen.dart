@@ -76,6 +76,7 @@ class LoginScreen extends StatelessWidget {
         Provider.of(context).fetch(LoginFormManager);
     final AuthManager authManager = Provider.of(context).fetch(AuthManager);
     final Size mediaSize = MediaQuery.of(context).size;
+    final double _textSize = mediaSize.width * 0.05;
 
     return Scaffold(
       body: Container(
@@ -88,7 +89,7 @@ class LoginScreen extends StatelessWidget {
             children: <Widget>[
               ///The cookit title
               Padding(
-                padding: const EdgeInsets.only(top: 30.0),
+                padding: EdgeInsets.only(top: mediaSize.height * 0.05),
                 child: Hero(
                   tag: 'logo',
                   child: CookitTitle(),
@@ -111,7 +112,10 @@ class LoginScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(
-                    mediaSize.width * 0.12, 40.0, mediaSize.width * 0.12, 13.0),
+                    mediaSize.width * 0.12,
+                    mediaSize.height * 0.05,
+                    mediaSize.width * 0.12,
+                    mediaSize.height * 0.02),
                 child: RxTextField(
                   suscribe: manager.password$,
                   dispatch: manager.setPassword,
@@ -130,7 +134,8 @@ class LoginScreen extends StatelessWidget {
                       bottom: 10.0, right: mediaSize.width * 0.15),
                   alignment: Alignment.centerRight,
                   child: Text("Forgot your password?",
-                      style: textStyle(decoration: TextDecoration.underline)),
+                      style: textStyle(decoration: TextDecoration.underline, fontSize: _textSize)
+                          ),
                 ),
                 onTap: () {
                   FocusScope.of(context).unfocus();
@@ -148,7 +153,7 @@ class LoginScreen extends StatelessWidget {
                     horizontal: 60.0,
                     vertical: 5.0,
                   ),
-                  child: Text('Login', style: textStyle()),
+                  child: Text('Login', style: textStyle(fontSize: _textSize)),
                   color: Theme.of(context).accentColor,
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
@@ -163,13 +168,14 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(right: 6.0),
-                      child: Text('New?', style: textStyle()),
+                      child: Text('New?',
+                          style: textStyle(fontSize: _textSize)),
                     ),
                     InkWell(
                         child: Text(
                           'Signup here',
-                          style:
-                              textStyle(decoration: TextDecoration.underline),
+                          style: textStyle(decoration: TextDecoration.underline)
+                              .copyWith(fontSize: _textSize),
                           softWrap: true,
                         ),
                         onTap: () {
@@ -181,8 +187,12 @@ class LoginScreen extends StatelessWidget {
               ),
 
               ///RegisterWith Buttons
-              Text('─  OR  ─', style: textStyle()),
-              Text('Signup with', style: textStyle()),
+              Text('─  OR  ─',
+                  style:
+                      textStyle(fontSize: _textSize)),
+              Text('Signup with',
+                  style:
+                      textStyle(fontSize: _textSize)),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 20.0),
                 child: Row(

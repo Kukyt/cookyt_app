@@ -40,6 +40,7 @@ class SignupScreen extends StatelessWidget {
         Provider.of(context).fetch(SignUpFormManager);
     final AuthManager authManager = Provider.of(context).fetch(AuthManager);
     final Size mediaSize = MediaQuery.of(context).size;
+    final double _textSize = mediaSize.width*0.05;
 
     return Scaffold(
       body: Container(
@@ -107,7 +108,7 @@ class SignupScreen extends StatelessWidget {
                     horizontal: 30.0,
                     vertical: 5.0,
                   ),
-                  child: Text('Signup', style: textStyle()),
+                  child: Text('Signup', style: textStyle(fontSize: _textSize)),
                   color: Theme.of(context).accentColor,
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
@@ -120,7 +121,7 @@ class SignupScreen extends StatelessWidget {
                 child: InkWell(
                   child: Text(
                     'Back to login',
-                    style: textStyle(decoration: TextDecoration.underline),
+                    style: textStyle(decoration: TextDecoration.underline, fontSize: _textSize),
                   ),
                   onTap: () {
                     Navigator.pop(context);

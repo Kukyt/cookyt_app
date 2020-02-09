@@ -46,7 +46,8 @@ class RecoverPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size mediaSize = MediaQuery.of(context).size;
     AuthManager auth = Provider.of(context).fetch(AuthManager);
-    ResetPasswordManager manager = Provider.of(context).fetch(ResetPasswordManager);
+    ResetPasswordManager manager =
+        Provider.of(context).fetch(ResetPasswordManager);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -69,7 +70,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                     horizontal: mediaSize.width * 0.08, vertical: 10.0),
                 child: Text(
                   "To reset your password type your email and press the button below!^^",
-                  style: textStyle(),
+                  style: textStyle(fontSize: mediaSize.width * 0.055),
                 ),
               ),
               Padding(
@@ -86,7 +87,8 @@ class RecoverPasswordScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 30.0),
                 child: RxRaisedButton(
                     suscribe: manager.email$,
-                    child: Text("Send reset email", style: textStyle()),
+                    child: Text("Send reset email",
+                        style: textStyle(fontSize: mediaSize.width * 0.05)),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0)),
                     padding: const EdgeInsets.symmetric(

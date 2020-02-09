@@ -69,10 +69,11 @@ class RxRaisedButton extends RaisedButton {
         stream: suscribe,
         builder: (context, snapshot) {
           return RaisedButton(
-            onPressed: !snapshot.hasData ? null :
-                       !(snapshot.data is bool) ? onPressed : 
-                        snapshot.data ? onPressed : 
-                        null,
+            onPressed: !snapshot.hasData
+                ? null
+                : !(snapshot.data is bool)
+                    ? onPressed
+                    : snapshot.data ? onPressed : null,
             onLongPress: onLongPress,
             onHighlightChanged: onHighlightChanged,
             textTheme: textTheme,
