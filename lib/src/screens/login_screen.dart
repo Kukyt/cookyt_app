@@ -129,15 +129,8 @@ class LoginScreen extends StatelessWidget {
                   padding: EdgeInsets.only(
                       bottom: 10.0, right: mediaSize.width * 0.15),
                   alignment: Alignment.centerRight,
-                  child: Text(
-                    "Forgot your password?",
-                    style: textStyle(decoration: TextDecoration.underline)
-                        .copyWith(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      decorationThickness: 1.6,
-                    ),
-                  ),
+                  child: Text("Forgot your password?",
+                      style: textStyle(decoration: TextDecoration.underline)),
                 ),
                 onTap: () {
                   FocusScope.of(context).unfocus();
