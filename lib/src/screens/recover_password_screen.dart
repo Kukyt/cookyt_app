@@ -79,17 +79,19 @@ class RecoverPasswordScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0),
                 child: RaisedButton(
-                  child: Text("Send reset email", style: textStyle()),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30.0,
-                    vertical: 5.0,
-                  ),
-                  color: Theme.of(context).accentColor,
-                  onPressed: () => _sendResetPasswordEmail(
-                      context, auth, textController.text),
-                ),
+                    child: Text("Send reset email", style: textStyle()),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0,
+                      vertical: 5.0,
+                    ),
+                    color: Theme.of(context).accentColor,
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      _sendResetPasswordEmail(
+                          context, auth, textController.text);
+                    }),
               ),
             ],
           ),

@@ -26,8 +26,7 @@ class AuthManager {
   }
 
   Future<FirebaseUser> signInWithGoogle() async {
-    GoogleSignIn googleSignIn = GoogleSignIn();
-    GoogleSignInAccount googleAccount = await googleSignIn.signIn();
+    GoogleSignInAccount googleAccount = await _googleSignIn.signIn();
     if (googleAccount != null) {
       GoogleSignInAuthentication googleAuth =
           await googleAccount.authentication;
